@@ -36,7 +36,7 @@ void f_n() { //function 'n'
 
 	if (bazare != NULL) { free(bazare); } //if "bazare" has some data in it, clear it
 	bazare = malloc(bazar_count * sizeof(BAZAR)); //alloc enough ram for "bazare"
-	if (bazare == NULL) { printf("Zaznamy neboli nacitane\n"); return; } //if ram allocation wasn't successful, print error message
+	if (bazare == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
 
 	int index = 0; //set array index to 0
 	while (fgets(line, line_size, f) != NULL) { //go through the file
@@ -63,6 +63,62 @@ void f_v() {
 	}
 }
 
+void f_p() {
+	int cislo = 0;
+	scanf("%d",&cislo);
+	
+	//if (bazare == NULL) { return; }
+	
+	if ((cislo > bazar_count) || (cislo < 1)) { //if number is greater than the number of entries, or lower than 1, make it one more then the entry count
+		cislo = bazar_count + 1;
+	}
+
+	BAZAR* novy; //new structure
+	bazar_count++; //increment the size
+
+	novy = malloc(bazar_count * sizeof(BAZAR)); //alloc enough ram for new structure
+	if (novy == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+
+	char* line; //line buffer
+	int line_size = 200; //max line size
+	line = (char*)malloc(line_size * sizeof(char)); //alloc enough ram for "line"
+	if (line == NULL) { printf("Nepodarilo sa priradit pamat\n"); } //if ram allocation wasn't successful, print error message
+	
+	BAZAR tmp; //read new data and store them temporarily
+	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; strcpy(tmp.kategoria, line); //add \n char to each line and end string properly with \0
+	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; strcpy(tmp.znacka, line);
+	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; strcpy(tmp.predajca, line);
+	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; tmp.cena = atoi(line);
+	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; tmp.rok_vyroby = atoi(line);
+	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; strcpy(tmp.stav_vozidla, line);
+	free(line);
+
+	int index = 0; //index in the old array
+
+	if ((cislo-1) <= (bazar_count-1)) { //if the index exists
+		for (int i = 0; i < bazar_count; i++) { //go through the structure
+			if (i == (cislo-1)) {  //add the new data in place of the index
+				novy[i] = tmp;
+				index--; //if index was altered, lower it back down
+			}
+			else { //otherwise copy old data
+				novy[i] = bazare[index];
+			}
+			index++; //increment index of element in old array
+		}
+	}
+	else { //the index did not exist - add new data to the end
+		for (int i = 0; i < (bazar_count-1); i++) {
+			novy[i] = bazare[i];
+		}
+		novy[(bazar_count - 1)] = tmp;
+	}
+
+	free(bazare);
+	bazare = novy; //give back new array
+
+}
+
 int main() {
 
 	char cmd; // command
@@ -70,7 +126,8 @@ int main() {
 	while (cmd = getchar()) { //wait for command
 		if (cmd == 'n') { f_n(); }
 		else if (cmd == 'v') { f_v(); }
-		else if (cmd == 'k') { break; } // finish program
+		else if (cmd == 'p') { f_p(); }
+		else if (cmd == 'k') { if (bazare != NULL) { free(bazare); } break; } // finish program
 	}
 
 	return 0;

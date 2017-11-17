@@ -2,6 +2,9 @@
 
 ---------
 
+> Build 5 (17.11.2017 22:09)
+- added new function 'p' for adding in data
+
 > Update (17.11.2017 17:23)
 - added links to commits into changelog
 
