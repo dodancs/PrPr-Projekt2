@@ -2,6 +2,10 @@
 
 ---------
 
+> Update (17.11.2017 17:01)
+- added comments into the code for easier understanding of the code
+- added clearing of unused variables
+
 > Update (17.11.2017 16:54)
 - changed "bazare" and "bazar_count" variables to global for ease of access
 
