@@ -2,6 +2,9 @@
 
 ---------
 
+> Commit 6 (17.11.2017 13:43)
+- added main C file
+
 > Commit 5 (17.11.2017 13:38)
 - created a new Visual Studio project in sources
 - added link to source code to Readme
