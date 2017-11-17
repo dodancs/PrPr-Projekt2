@@ -24,7 +24,7 @@ void f_n() {
 	int bazar_count = 0;
 
 	while (fgets(line, line_size, f) != NULL) {
-		if (line == "$") {
+		if (strstr(line, "$") != NULL) {
 			bazar_count++;
 		}
 	}
@@ -36,9 +36,13 @@ void f_n() {
 
 	int index = 0;
 	while (fgets(line, line_size, f) != NULL) {
-		if (line == "$") {
-			fgets(line, line_size, f);
-			strcpy(bazare[index].kategoria,line);
+		if (strstr(line, "$") != NULL) {
+			fgets(line, line_size, f); strcpy(bazare[index].kategoria,line);
+			fgets(line, line_size, f); strcpy(bazare[index].znacka, line);
+			fgets(line, line_size, f); strcpy(bazare[index].predajca, line);
+			fgets(line, line_size, f); bazare[index].cena = atoi(line);
+			fgets(line, line_size, f); bazare[index].rok_vyroby = atoi(line);
+			fgets(line, line_size, f); strcpy(bazare[index].stav_vozidla, line);
 		}
 	}
 }
