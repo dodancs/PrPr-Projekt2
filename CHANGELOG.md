@@ -2,6 +2,10 @@
 
 ---------
 
+> Commit 5 (17.11.2017 13:38)
+- created a new Visual Studio project in sources
+- added link to source code to Readme
+
 > Commit 4 (17.11.2017 13:24)
 - more edits in Readme
 
