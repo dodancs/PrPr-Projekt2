@@ -2,6 +2,11 @@
 
 ---------
 
+> Commit 7 (17.11.2017 14:00)
+- added main function to determine which command to process
+- added first lines of code for the 'n'-function
+- added structure for saving read data to memory
+
 > Commit 6 (17.11.2017 13:43)
 - added main C file
 
