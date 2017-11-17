@@ -2,6 +2,9 @@
 
 ---------
 
+> Commit 8 (17.11.2017 14:06)
+- added preprocessor definition for "_CRT_SECURE_NO_WARNINGS" without which Visual Studio won't compile the project
+
 > Commit 7 (17.11.2017 14:00)
 - added main function to determine which command to process
 - added first lines of code for the 'n'-function
