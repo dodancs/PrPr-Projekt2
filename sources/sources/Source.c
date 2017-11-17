@@ -12,6 +12,9 @@ typedef struct bazar {
 	char stav_vozidla[200];
 } BAZAR;
 
+BAZAR* bazare;
+int bazar_count = 0;
+
 void f_n() {
 	FILE* f = fopen("auta.txt","r");
 	if (f == NULL) { printf("Zaznamy neboli nacitane\n"); return; }
@@ -21,8 +24,7 @@ void f_n() {
 	line = (char*)malloc(line_size * sizeof(char));
 	if (line == NULL) { printf("Nepodarilo sa priradit pamat\n"); }
 
-	int bazar_count = 0;
-
+	bazar_count = 0;
 	while (fgets(line, line_size, f) != NULL) {
 		if (strstr(line, "$") != NULL) {
 			bazar_count++;
@@ -31,7 +33,8 @@ void f_n() {
 
 	rewind(f);
 
-	BAZAR* bazare = malloc(bazar_count * sizeof(BAZAR));
+	if (bazare != NULL) { free(bazare); }
+	bazare = malloc(bazar_count * sizeof(BAZAR));
 	if (bazare == NULL) { printf("Zaznamy neboli nacitane\n"); return; }
 
 	int index = 0;
@@ -45,6 +48,8 @@ void f_n() {
 			fgets(line, line_size, f); strcpy(bazare[index].stav_vozidla, line);
 		}
 	}
+
+	printf("Nacitalo sa %d zaznamov\n",bazar_count);
 }
 
 int main() {

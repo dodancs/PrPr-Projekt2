@@ -2,6 +2,9 @@
 
 ---------
 
+> Update (17.11.2017 16:54)
+- changed "bazare" and "bazar_count" variables to global for ease of access
+
 > Update (17.11.2017 14:26)
 - added .gitignore
 - added latest successful build to be available for download (14:29 - now fixed)
