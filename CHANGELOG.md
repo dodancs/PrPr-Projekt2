@@ -2,6 +2,9 @@
 
 ---------
 
+> Update (17.11.2017 22:29)
+- added usage to readme
+
 > Build 5 (17.11.2017 22:09)
 - added new function 'p' for adding in data
 
