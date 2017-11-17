@@ -41,12 +41,13 @@ void f_n() { //function 'n'
 	int index = 0; //set array index to 0
 	while (fgets(line, line_size, f) != NULL) { //go through the file
 		if (strstr(line, "$") != NULL) { //store all data into the structure
-			fgets(line, line_size, f); strcpy(bazare[index].kategoria,line);
+			fgets(line, line_size, f); strcpy(bazare[index].kategoria, line);
 			fgets(line, line_size, f); strcpy(bazare[index].znacka, line);
 			fgets(line, line_size, f); strcpy(bazare[index].predajca, line);
 			fgets(line, line_size, f); bazare[index].cena = atoi(line);
 			fgets(line, line_size, f); bazare[index].rok_vyroby = atoi(line);
 			fgets(line, line_size, f); strcpy(bazare[index].stav_vozidla, line);
+			index++;
 		}
 	}
 
@@ -55,12 +56,20 @@ void f_n() { //function 'n'
 	free(line); //put allocated ram back to heap
 }
 
+void f_v() {
+	if (bazare == NULL) { return; }
+	for (int i = 0; i < bazar_count; i++) {
+		printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s",i+1,bazare[i].kategoria,bazare[i].znacka,bazare[i].predajca,bazare[i].cena,bazare[i].rok_vyroby,bazare[i].stav_vozidla);
+	}
+}
+
 int main() {
 
 	char cmd; // command
 
 	while (cmd = getchar()) { //wait for command
 		if (cmd == 'n') { f_n(); }
+		else if (cmd == 'v') { f_v(); }
 		else if (cmd == 'k') { break; } // finish program
 	}
 

@@ -2,6 +2,10 @@
 
 ---------
 
+> Build 4 (17.11.2017 17:09)
+- added function for printing out data in the structure
+- fixed storing of data (missing incrementing of index)
+
 > Update (17.11.2017 17:01)
 - added comments into the code for easier understanding of the code
 - added clearing of unused variables
