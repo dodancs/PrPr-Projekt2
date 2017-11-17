@@ -4,7 +4,7 @@
 
 > Update (17.11.2017 14:26)
 - added .gitignore
-- added latest successful build to be available for download
+- added latest successful build to be available for download (14:29 - now fixed)
 
 > Build 3 (17.11.2017 14:22)
 - function 'n' now reads file and stores data in a dynamic structure successfully
