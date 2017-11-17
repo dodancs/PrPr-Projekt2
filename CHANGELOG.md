@@ -2,6 +2,9 @@
 
 ---------
 
+> Commit 4 (17.11.2017 13:24)
+- more edits in Readme
+
 > Commit 3 (17.11.2017 13:20)
 - added resources folder with testing files and the original projekt assignment
 

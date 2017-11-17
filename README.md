@@ -8,7 +8,7 @@ Projekt na Proceduralne programovanie
  * Vystupy: [stiahnut](resources/vystupy.txt)
 
 
-Posledny uspesny build: [stiahnut](build/latest.exe)
+Posledny uspesny build: [stiahnut](build/latest.exe) | [changelog](CHANGELOG.md)
 
 Potrebny software:
 
