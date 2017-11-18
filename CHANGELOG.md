@@ -2,6 +2,9 @@
 
 ---------
 
+> Update (18.11.2017 14:57)
+- fixed source link in readme
+
 > Build 8 (18.11.2017 14:47)
 - added custom function 'readUntilBreak' to read from stdin until \n is present to read sentences with whitespaces
 - fixed function 'p' which did not read the whole sentence from stdin
