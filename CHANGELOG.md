@@ -2,28 +2,33 @@
 
 ---------
 
-> Build 9 (18.11.2017 15:12)
+> Update (18.11.2017 15:20)
+- added links for commits to changelog
+- offical 1.0 release can be found in releases tab
+- todo: upcomming readme edits
+
+> Build 9 (18.11.2017 15:12) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/9bc6db1791817003392e4b5672c23831042cf2b0)
 - added function 'a' for editing entries
 - updated readme
 - latest build is available in the releases tab
 
-> Update (18.11.2017 14:57)
+> Update (18.11.2017 14:57) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/0c1523ea6b01ec469d803b5a1ce02441fb7f8ba5)
 - fixed source link in readme
 
-> Build 8 (18.11.2017 14:47)
+> Build 8 (18.11.2017 14:47) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/a65f125ad38c2e6e734697c4e8b9d786bd0daa54)
 - added custom function 'readUntilBreak' to read from stdin until \n is present to read sentences with whitespaces
 - fixed function 'p' which did not read the whole sentence from stdin
 
-> Update (18.11.2017 13:55)
+> Update (18.11.2017 13:55) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/a385f5b3b35d2e3aed1ea2f0d371f5da411e0744)
 - edited readme to be more clear
 
-> Build 7 (18.11.2017 13:43)
+> Build 7 (18.11.2017 13:43) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/8d3b856fdf54f744b395d0a4444eea5a911ffe8a)
 - function 'h' was added for searching for an entry priced lower or equal to the given price
 - added memory allocation error checks for function 'z'
 - added new functionality explanations to readme
 - new release will be in the releases tab
 
-> Update (18.11.2017 13:26)
+> Update (18.11.2017 13:26) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/8377ee2541d57ac815b96a086e03ef81db74b278)
 - added links to new commits into changelog
 
 > Update (18.11.2017 13:24) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/a1f867a261bece653afb14e457873a3bad569896)
