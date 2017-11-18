@@ -2,6 +2,12 @@
 
 ---------
 
+> Build 7 (18.11.2017 13:43)
+- function 'h' was added for searching for an entry priced lower or equal to the given price
+- added memory allocation error checks for function 'z'
+- added new functionality explanations to readme
+- new release will be in the releases tab
+
 > Update (18.11.2017 13:26)
 - added links to new commits into changelog
 

@@ -42,6 +42,18 @@ C\> prpr.exe
       
     z %s <- zmaze zaznam/zaznamy zo struktury, ktore obsahuju nacitany retazec v znacke
       Vymazalo sa %d zaznamov
+	  
+	h %d <- vypise vsetky zaznamy s cenou nizsou alebo rovnou zadanej cene
+	  1.
+      kategoria: %s
+      znacka: %s
+      predajca: %s
+      cena: (%d <= %d)
+      rok_vyroby: %d
+      stav_vozidla: %s
+	  
+	  <- inak vypise danu spravu:
+	  V ponuke su len auta s vyssou cenou
 ```
 
 #### Kontakt
