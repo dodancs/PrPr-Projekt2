@@ -57,17 +57,17 @@ C\> prpr.exe
 ##### 5. Vypisanie zaznamov z cenou nizsou alebo rovnou danej cene
 ```
 C\> prpr.exe
-	h %d <- vypise vsetky zaznamy s cenou nizsou alebo rovnou zadanej cene
-	  1.
+    h %d <- vypise vsetky zaznamy s cenou nizsou alebo rovnou zadanej cene
+      1.
       kategoria: %s
       znacka: %s
       predajca: %s
       cena: (%d <= %d)
       rok_vyroby: %d
       stav_vozidla: %s
-	  
-	  <- inak vypise danu spravu:
-	  V ponuke su len auta s vyssou cenou
+
+    <- inak vypise danu spravu:
+      V ponuke su len auta s vyssou cenou
 ```
 
 #### Kontakt
