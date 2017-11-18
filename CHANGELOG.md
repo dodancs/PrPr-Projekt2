@@ -2,6 +2,10 @@
 
 ---------
 
+> Build 6 (18.11.2017 13:20)
+- fixed readme
+- added new function 'z' for deleting entries from structure
+
 > Update (17.11.2017 22:29)
 - added usage to readme
 

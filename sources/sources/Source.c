@@ -119,6 +119,44 @@ void f_p() {
 
 }
 
+void f_z() {
+	if (bazare == NULL) { return; }
+
+	char temp1[50]; //temp string 1 - from structure
+	char temp2[50]; //temp string 2 - from stdin
+	int* indexes; //array of indexes of entries being kept
+	indexes = (int*)malloc(bazar_count * sizeof(int));
+
+	scanf("%s",&temp2); //scan for input to compare
+	temp2[strlen(temp2)] = '\0'; //properly finish string
+	for (int j = 0; j < strlen(temp2); j++) { temp2[j] = tolower(temp2[j]); } //convert to lowercase
+
+	int kept = 0; //number of kept entries
+
+	for (int i = 0; i < bazar_count; i++) { //go throught the structure
+		strcpy(temp1,bazare[i].znacka);
+		for (int j = 0; j < strlen(temp1); j++) { temp1[j] = tolower(temp1[j]); } //convert string to lowercase
+		if (strstr(temp1, temp2) == NULL) { indexes[kept] = i; kept++; } //if no match is found, put index of entry to the array
+	}
+
+	int removed = bazar_count - kept;
+	bazar_count = kept;
+
+	BAZAR* novy; //new structure without removed items
+	novy = malloc(bazar_count * sizeof(BAZAR)); //alloc enough ram for new structure
+	if (novy == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+
+	for (int i = 0; i < bazar_count; i++) {
+		novy[i] = bazare[indexes[i]]; //put kept items to the new array
+	}
+
+	free(bazare);
+	bazare = novy;
+	free(indexes);
+
+	printf("Vymazalo sa %d zaznamov\n",removed);
+}
+
 int main() {
 
 	char cmd; // command
@@ -127,6 +165,7 @@ int main() {
 		if (cmd == 'n') { f_n(); }
 		else if (cmd == 'v') { f_v(); }
 		else if (cmd == 'p') { f_p(); }
+		else if (cmd == 'z') { f_z(); }
 		else if (cmd == 'k') { if (bazare != NULL) { free(bazare); } break; } // finish program
 	}
 
