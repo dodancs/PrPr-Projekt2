@@ -16,6 +16,20 @@ typedef struct bazar { //define bazar structure
 BAZAR* bazare;
 int bazar_count = 0;
 
+void readUntilBreak(char **string) { //read from stdin until '\n' line break character is present
+	int i = 0;
+	char* line = (char*)malloc(200 * sizeof(char));
+	if (line == NULL) { printf("Nepodarilo sa priradit pamat\n"); } //if ram allocation wasn't successful, print error message
+	while (1) {
+		scanf("%c",&line[i]); //read new char from stdin
+		if (line[i] == '\n') { break; } //if the char is '\n' break the loop
+		i++; //otherwise increment index
+	}
+	line[i++] = '\n'; //add line break to the end
+	line[i] = '\0'; //properly end string with \0
+	*string = line; //return string
+}
+
 void f_n() { //function 'n'
 	FILE* f = fopen("auta.txt","r"); //open file
 	if (f == NULL) { printf("Zaznamy neboli nacitane\n"); return; } //if file wasn't opened, print error message
@@ -65,7 +79,7 @@ void f_v() {
 
 void f_p() {
 	int cislo = 0;
-	scanf("%d",&cislo);
+	scanf("%d\n",&cislo); //also read '\n' character to not mess up readUntilBreak() function
 	
 	//if (bazare == NULL) { return; }
 	
@@ -80,17 +94,14 @@ void f_p() {
 	if (novy == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
 
 	char* line; //line buffer
-	int line_size = 200; //max line size
-	line = (char*)malloc(line_size * sizeof(char)); //alloc enough ram for "line"
-	if (line == NULL) { printf("Nepodarilo sa priradit pamat\n"); } //if ram allocation wasn't successful, print error message
 	
 	BAZAR tmp; //read new data and store them temporarily
-	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; strcpy(tmp.kategoria, line); //add \n char to each line and end string properly with \0
-	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; strcpy(tmp.znacka, line);
-	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; strcpy(tmp.predajca, line);
-	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; tmp.cena = atoi(line);
-	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; tmp.rok_vyroby = atoi(line);
-	scanf("%s", line); strcat(line, "\n"); line[strlen(line)] = '\0'; strcpy(tmp.stav_vozidla, line);
+	readUntilBreak(&line); strcpy(tmp.kategoria, line);
+	readUntilBreak(&line); strcpy(tmp.znacka, line);
+	readUntilBreak(&line); strcpy(tmp.predajca, line);
+	readUntilBreak(&line); tmp.cena = atoi(line);
+	readUntilBreak(&line); tmp.rok_vyroby = atoi(line);
+	readUntilBreak(&line); strcpy(tmp.stav_vozidla, line);
 	free(line);
 
 	int index = 0; //index in the old array
@@ -116,7 +127,6 @@ void f_p() {
 
 	free(bazare);
 	bazare = novy; //give back new array
-
 }
 
 void f_z() {
