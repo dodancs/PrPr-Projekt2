@@ -195,7 +195,40 @@ void f_h() {
 }
 
 void f_a() {
+	char* line; //line buffer
+	char* znacka;
+	int cena;
 
+	scanf("\n"); //read line break after executing command
+
+	readUntilBreak(&znacka); //read znacka to compare
+	readUntilBreak(&line); //read cena to compare
+	cena = atoi(line);
+
+	BAZAR tmp; //read new data and store them temporarily
+	readUntilBreak(&line); strcpy(tmp.kategoria, line);
+	readUntilBreak(&line); strcpy(tmp.znacka, line);
+	readUntilBreak(&line); strcpy(tmp.predajca, line);
+	readUntilBreak(&line); tmp.cena = atoi(line);
+	readUntilBreak(&line); tmp.rok_vyroby = atoi(line);
+	readUntilBreak(&line); strcpy(tmp.stav_vozidla, line);
+	free(line);
+
+	int* indexes; //array of indexes of entries to edit
+	indexes = (int*)malloc(bazar_count * sizeof(int));
+	if (indexes == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+
+	int index = 0; //number of entries to edit
+	for (int i = 0; i < bazar_count; i++) { //go throught the structure
+		if ((bazare[i].cena == cena) && (strcmp(bazare[i].znacka, znacka) == 0)) { indexes[index] = i; index++; } //if match is found, store the index
+	}
+
+	for (int i = 0; i < index; i++) {
+		bazare[indexes[i]] = tmp; //replace existing data with updated data
+	}
+
+	printf("Aktualizovalo sa %d zaznamov\n",index);
+	free(indexes);
 }
 
 int main() {

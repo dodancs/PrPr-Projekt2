@@ -2,6 +2,11 @@
 
 ---------
 
+> Build 9 (18.11.2017 15:12)
+- added function 'a' for editing entries
+- updated readme
+- latest build is available in the releases tab
+
 > Update (18.11.2017 14:57)
 - fixed source link in readme
 

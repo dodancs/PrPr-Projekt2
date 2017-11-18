@@ -69,6 +69,18 @@ C\> prpr.exe
     <- inak vypise danu spravu:
       V ponuke su len auta s vyssou cenou
 ```
+##### 6. Upravenie zaznamov, ktore maju urcitu cenu a znacku
+```
+C\> prpr.exe
+    a %s %d <- nacita nove udaje a aktualizuje existujuce zaznamy, ktore presli kriteriami
+      %s
+      %s
+      %s
+      %d
+      %d
+      %s
+      Aktualizovalo sa %d zaznamov
+```
 
 #### Kontakt
 
