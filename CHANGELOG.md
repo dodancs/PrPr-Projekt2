@@ -2,6 +2,9 @@
 
 ---------
 
+> Update (18.11.2017 13:55)
+- edited readme to be more clear
+
 > Build 7 (18.11.2017 13:43)
 - function 'h' was added for searching for an entry priced lower or equal to the given price
 - added memory allocation error checks for function 'z'
