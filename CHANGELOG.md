@@ -2,20 +2,23 @@
 
 ---------
 
-> Update (18.11.2017 13:24)
+> Update (18.11.2017 13:26)
+- added links to new commits into changelog
+
+> Update (18.11.2017 13:24) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/a1f867a261bece653afb14e457873a3bad569896)
 - updated readme
 
-> Build 6 (18.11.2017 13:20)
-- fixed readme
+> Build 6 (18.11.2017 13:20) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/1788e834e900cc750e75d0dbce3bb5140cc085e6)
 - added new function 'z' for deleting entries from structure
+- fixed readme
 
-> Update (17.11.2017 22:29)
+> Update (17.11.2017 22:29) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/fe331d97a7fbffe41d6b8f4a60e41245dac37cce)
 - added usage to readme
 
-> Build 5 (17.11.2017 22:09)
+> Build 5 (17.11.2017 22:09) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/ad974916e1e61cc25652d5f1f75a05b3770ab103)
 - added new function 'p' for adding in data
 
-> Update (17.11.2017 17:23)
+> Update (17.11.2017 17:23) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/33b0cb50ea93fbe5dc8f6efbff1941c1373edb33)
 - added links to commits into changelog
 
 > Build 4 (17.11.2017 17:09) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/be0e53a66ab4293ae088410a2c5b8cf04e97745c)
