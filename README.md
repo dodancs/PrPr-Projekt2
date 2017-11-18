@@ -39,6 +39,9 @@ C\> prpr.exe
       %d
       %d
       %s
+      
+    z %s <- zmaze zaznam/zaznamy zo struktury, ktore obsahuju nacitany retazec v znacke
+      Vymazalo sa %d zaznamov
 ```
 
 #### Kontakt
