@@ -2,6 +2,9 @@
 
 ---------
 
+> Dev Build 3 (21.11.2017 22:16)
+- refactored function 'p' to use linked list
+
 > Dev Build 2 (21.11.2017 13:44)
 - refactored function 'v' to use linked list
 - fixed storing items into linked list in function 'n'

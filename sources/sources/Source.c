@@ -96,52 +96,54 @@ void f_p() {
 	int cislo = 0;
 	scanf("%d\n",&cislo); //also read '\n' character to not mess up readUntilBreak() function
 	
-	//if (bazare == NULL) { return; }
+	if (bazare == NULL) { return; }
 	
 	if ((cislo > bazar_count) || (cislo < 1)) { //if number is greater than the number of entries, or lower than 1, make it one more then the entry count
 		cislo = bazar_count + 1;
 	}
-
-	BAZAR* novy; //new structure
-	bazar_count++; //increment the size
-
-	novy = malloc(bazar_count * sizeof(BAZAR)); //alloc enough ram for new structure
-	if (novy == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+	bazar_count++;
 
 	char* line; //line buffer
-	
-	BAZAR tmp; //read new data and store them temporarily
-	readUntilBreak(&line); strcpy(tmp.kategoria, line);
-	readUntilBreak(&line); strcpy(tmp.znacka, line);
-	readUntilBreak(&line); strcpy(tmp.predajca, line);
-	readUntilBreak(&line); tmp.cena = atoi(line);
-	readUntilBreak(&line); tmp.rok_vyroby = atoi(line);
-	readUntilBreak(&line); strcpy(tmp.stav_vozidla, line);
+	BAZAR* tmp = (BAZAR*)malloc(sizeof(BAZAR)); //new data temporary storage
+	if (tmp == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+	readUntilBreak(&line); strcpy(tmp->kategoria, line);
+	readUntilBreak(&line); strcpy(tmp->znacka, line);
+	readUntilBreak(&line); strcpy(tmp->predajca, line);
+	readUntilBreak(&line); tmp->cena = atoi(line);
+	readUntilBreak(&line); tmp->rok_vyroby = atoi(line);
+	readUntilBreak(&line); strcpy(tmp->stav_vozidla, line);
+
+	BAZAR* current = bazare;
+
+	if (cislo > (bazar_count - 1)) { //add new data to the end of linked list
+		BAZAR* prev = current; //keep previous
+		while (current != NULL) {
+			prev = current;
+			current = current->dalsi; //find last item
+		}
+		prev->dalsi = tmp;
+		tmp->dalsi = NULL;
+	}
+	else {
+		current = bazare;
+		BAZAR* prev = current; //keep previous
+		if (cislo == 1) { //shift all data to right
+			BAZAR* old = bazare;
+			tmp->dalsi = old;
+			bazare = tmp;
+		}
+		else { //only shift part of data to right
+			for (int i = 1; i < cislo; i++) {
+				prev = current;
+				current = current->dalsi;
+			}
+
+			prev->dalsi = tmp;
+			tmp->dalsi = current;
+		}
+	}
+
 	free(line);
-
-	int index = 0; //index in the old array
-
-	if ((cislo-1) <= (bazar_count-1)) { //if the index exists
-		for (int i = 0; i < bazar_count; i++) { //go through the structure
-			if (i == (cislo-1)) {  //add the new data in place of the index
-				novy[i] = tmp;
-				index--; //if index was altered, lower it back down
-			}
-			else { //otherwise copy old data
-				novy[i] = bazare[index];
-			}
-			index++; //increment index of element in old array
-		}
-	}
-	else { //the index did not exist - add new data to the end
-		for (int i = 0; i < (bazar_count-1); i++) {
-			novy[i] = bazare[i];
-		}
-		novy[(bazar_count - 1)] = tmp;
-	}
-
-	free(bazare);
-	bazare = novy; //give back new array
 }
 
 void f_z() {
