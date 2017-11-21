@@ -55,6 +55,7 @@ void f_n() { //function 'n'
 
 	BAZAR* current = bazare;
 
+	int i = 1;
 	while (fgets(line, line_size, f) != NULL) { //go through the file
 		if (strstr(line, "$") != NULL) { //store all data into the structure
 			fgets(line, line_size, f); strcpy(current->kategoria, line);
@@ -63,9 +64,15 @@ void f_n() { //function 'n'
 			fgets(line, line_size, f); current->cena = atoi(line);
 			fgets(line, line_size, f); current->rok_vyroby = atoi(line);
 			fgets(line, line_size, f); strcpy(current->stav_vozidla, line);
-			current->dalsi = (BAZAR*)malloc(sizeof(BAZAR));
-			current = current->dalsi;
-			if (current == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+			if (i < bazar_count) { //only create next item if there is another one
+				current->dalsi = (BAZAR*)malloc(sizeof(BAZAR));
+				current = current->dalsi;
+				if (current == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+			}
+			else { //next item does not exist - set it to NULL
+				current->dalsi = NULL;
+			}
+			i++;
 		}
 	}
 
@@ -76,8 +83,12 @@ void f_n() { //function 'n'
 
 void f_v() {
 	if (bazare == NULL) { return; }
-	for (int i = 0; i < bazar_count; i++) {
-		printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s",i+1,bazare[i].kategoria,bazare[i].znacka,bazare[i].predajca,bazare[i].cena,bazare[i].rok_vyroby,bazare[i].stav_vozidla);
+	BAZAR* current = bazare;
+	int i = 1;
+	while (current != NULL) {
+		printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s",i,current->kategoria,current->znacka,current->predajca,current->cena,current->rok_vyroby,current->stav_vozidla);
+		current = current->dalsi;
+		i++;
 	}
 }
 

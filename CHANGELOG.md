@@ -2,6 +2,10 @@
 
 ---------
 
+> Dev Build 2 (21.11.2017 13:44)
+- refactored function 'v' to use linked list
+- fixed storing items into linked list in function 'n'
+
 > Refactor (21.11.2017 13:19)
 - transforming data structure into a better solution - linked list
 - function 'n' is now optimized
