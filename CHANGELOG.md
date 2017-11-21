@@ -2,6 +2,11 @@
 
 ---------
 
+> Refactor (21.11.2017 13:19)
+- transforming data structure into a better solution - linked list
+- function 'n' is now optimized
+- please do not use functions 'v' to 'a' right now
+
 > Update (18.11.2017 15:20)
 - added links for commits to changelog
 - offical 1.0 release can be found in releases tab

@@ -10,6 +10,7 @@ typedef struct bazar { //define bazar structure
 	int cena;
 	int rok_vyroby;
 	char stav_vozidla[200];
+	struct bazar* dalsi; //linked list
 } BAZAR;
 
 //global variables for ease of use
@@ -49,19 +50,22 @@ void f_n() { //function 'n'
 	rewind(f); //go back to the beginning of file
 
 	if (bazare != NULL) { free(bazare); } //if "bazare" has some data in it, clear it
-	bazare = malloc(bazar_count * sizeof(BAZAR)); //alloc enough ram for "bazare"
+	bazare = (BAZAR*)malloc(sizeof(BAZAR)); //alloc enough ram for "bazare"
 	if (bazare == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
 
-	int index = 0; //set array index to 0
+	BAZAR* current = bazare;
+
 	while (fgets(line, line_size, f) != NULL) { //go through the file
 		if (strstr(line, "$") != NULL) { //store all data into the structure
-			fgets(line, line_size, f); strcpy(bazare[index].kategoria, line);
-			fgets(line, line_size, f); strcpy(bazare[index].znacka, line);
-			fgets(line, line_size, f); strcpy(bazare[index].predajca, line);
-			fgets(line, line_size, f); bazare[index].cena = atoi(line);
-			fgets(line, line_size, f); bazare[index].rok_vyroby = atoi(line);
-			fgets(line, line_size, f); strcpy(bazare[index].stav_vozidla, line);
-			index++;
+			fgets(line, line_size, f); strcpy(current->kategoria, line);
+			fgets(line, line_size, f); strcpy(current->znacka, line);
+			fgets(line, line_size, f); strcpy(current->predajca, line);
+			fgets(line, line_size, f); current->cena = atoi(line);
+			fgets(line, line_size, f); current->rok_vyroby = atoi(line);
+			fgets(line, line_size, f); strcpy(current->stav_vozidla, line);
+			current->dalsi = (BAZAR*)malloc(sizeof(BAZAR));
+			current = current->dalsi;
+			if (current == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
 		}
 	}
 
