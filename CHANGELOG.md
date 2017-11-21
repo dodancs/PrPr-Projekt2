@@ -2,6 +2,9 @@
 
 ---------
 
+> Update (21.11.2017 22:28)
+- development releases are available in releases tab
+
 > Dev Build 3 (21.11.2017 22:16)
 - refactored function 'p' to use linked list
 
