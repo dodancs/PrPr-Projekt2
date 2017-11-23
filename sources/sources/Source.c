@@ -151,36 +151,28 @@ void f_z() {
 
 	char temp1[50]; //temp string 1 - from structure
 	char temp2[50]; //temp string 2 - from stdin
-	int* indexes; //array of indexes of entries being kept
-	indexes = (int*)malloc(bazar_count * sizeof(int));
-	if (indexes == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
 
 	scanf("%s",&temp2); //scan for input to compare
 	temp2[strlen(temp2)] = '\0'; //properly finish string
 	for (int j = 0; j < strlen(temp2); j++) { temp2[j] = tolower(temp2[j]); } //convert to lowercase
 
-	int kept = 0; //number of kept entries
+	int removed = 0; //number of removed entries
 
+	BAZAR* current = bazare;
+	BAZAR* prev = NULL;
 	for (int i = 0; i < bazar_count; i++) { //go throught the structure
-		strcpy(temp1,bazare[i].znacka);
+		if (current == NULL) { break; }
+		strcpy(temp1,current->znacka);
 		for (int j = 0; j < strlen(temp1); j++) { temp1[j] = tolower(temp1[j]); } //convert string to lowercase
-		if (strstr(temp1, temp2) == NULL) { indexes[kept] = i; kept++; } //if no match is found, put index of entry to the array
+		if (strstr(temp1, temp2) != NULL) {
+			if (prev == NULL) { printf("tu som\n"); bazare = current->dalsi; current = bazare; }
+			else { printf("tu nie som\n"); prev->dalsi = current->dalsi; }
+			removed++;
+		} 
+		prev = current;
+		current = current->dalsi;
 	}
-
-	int removed = bazar_count - kept;
-	bazar_count = kept;
-
-	BAZAR* novy; //new structure without removed items
-	novy = malloc(bazar_count * sizeof(BAZAR)); //alloc enough ram for new structure
-	if (novy == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
-
-	for (int i = 0; i < bazar_count; i++) {
-		novy[i] = bazare[indexes[i]]; //put kept items to the new array
-	}
-
-	free(bazare);
-	bazare = novy;
-	free(indexes);
+	bazar_count = bazar_count - removed;
 
 	printf("Vymazalo sa %d zaznamov\n",removed);
 }
@@ -188,27 +180,27 @@ void f_z() {
 void f_h() {
 	if (bazare == NULL) { return; }
 
-	int* indexes; //array of indexes of entries to print
-	indexes = (int*)malloc(bazar_count * sizeof(int));
-	if (indexes == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
-
 	int cena;
 	scanf("%d", &cena); //scan for input to compare
 
 	int index = 0; //number of entries to print
-	for (int i = 0; i < bazar_count; i++) { //go throught the structure
-		if (bazare[i].cena <= cena) { indexes[index] = i; index++; } //if match is found, store the index
+	BAZAR* current = bazare;
+	while (current != NULL) {
+		if (current->cena <= cena) {
+			index++;
+		}
+		current = current->dalsi;
 	}
-
+	current = bazare;
 	if (index == 0) { printf("V ponuke su len auta s vyssou cenou\n"); return; } //if no match was found, print message and return;
-
-	int j = 0;
-	for (int i = 0; i < index; i++) { //print all matches
-		j = indexes[i];
-		printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s", i + 1, bazare[j].kategoria, bazare[j].znacka, bazare[j].predajca, bazare[j].cena, bazare[j].rok_vyroby, bazare[j].stav_vozidla);
+	int i = 1;
+	while (current != NULL) {
+		if (current->cena <= cena) {
+			printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s", i, current->kategoria, current->znacka, current->predajca, current->cena, current->rok_vyroby, current->stav_vozidla);
+			i++;
+		}
+		current = current->dalsi;
 	}
-
-	free(indexes);
 }
 
 void f_a() {

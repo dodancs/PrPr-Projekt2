@@ -2,6 +2,10 @@
 
 ---------
 
+> Dev Build 4 (23.11.2017 18:57)
+- refactored function 'h' to use linked lists
+- function 'z' partially works, but there are issues when deleting the whole structure
+
 > Update (21.11.2017 22:28)
 - development releases are available in releases tab
 
