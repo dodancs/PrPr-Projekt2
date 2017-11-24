@@ -2,6 +2,10 @@
 
 ---------
 
+> Build 10 (24.11.2017 14:40)
+- merged development branch
+- offical release 2.0 can be found in releases tab
+
 > Dev Build 10 (24.11.2017 14:30)
 - more optimization - using global variables for common cases
 
