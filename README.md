@@ -8,7 +8,9 @@ Projekt na Proceduralne programovanie
  * Vystupy: [stiahnut](resources/vystupy.txt)
 
 
-Posledny uspesny build: [stiahnut](https://github.com/dodancs/PrPr-Projekt2/releases) | [changelog](CHANGELOG.md) | [source](https://github.com/dodancs/PrPr-Projekt2/blob/master/sources/sources/Source.c)
+Posledny uspesny build: [stiahnut](https://github.com/dodancs/PrPr-Projekt2/releases) | [changelog](https://github.com/dodancs/PrPr-Projekt2/blob/master/CHANGELOG.md) | [source](https://github.com/dodancs/PrPr-Projekt2/blob/master/sources/sources/Source.c)
+
+Development build: [stiahnut](https://github.com/dodancs/PrPr-Projekt2/releases) | [changelog](https://github.com/dodancs/PrPr-Projekt2/blob/develop/CHANGELOG.md) | [source](https://github.com/dodancs/PrPr-Projekt2/blob/develop/sources/sources/Source.c)
 
 Potrebny software:
 

@@ -2,7 +2,54 @@
 
 ---------
 
-> Update (18.11.2017 15:20)
+> Dev Build 10 (24.11.2017 14:30)
+- more optimization - using global variables for common cases
+
+> Dev Build 9 (24.11.2017 13:56)
+- fixed function 'p' to be able to add new entries when structure is not created first
+- some more optimizations
+
+> Dev Build 8 (24.11.2017 13:42)
+- removed unused variables
+- removed useless variables
+- reused existing variables
+- some memory optimization
+
+> Update (24.11.2017 13:42)
+- added new links for commits
+
+> Dev Build 7 (24.11.2017 13:28) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/71b8d29b549b16dfda369d5de183f8ef6bd4ace0)
+- removed temporary testing console outputs
+- added comments for function 'a'
+
+> Dev Build 6 (24.11.2017 13:15) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/999232b56641b65dd825c0d53c9dd666d8f5b6f9)
+- refactored function 'a' to use linked lists
+- upcomming stable release
+
+> Dev Build 5 (24.11.2017 12:42) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/dfd6e250b73ac4a720f045bc0f7134ee8f334cda)
+- fixed function 'z', deleting entries now fully works (with linked lists)
+- new release dev-2.4 is available in releases tab
+
+> Dev Build 4 (23.11.2017 18:57) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/113ee2170c245418f0e87674b18174928f6c0e8d)
+- refactored function 'h' to use linked lists
+- function 'z' partially works, but there are issues when deleting the whole structure
+
+> Update (21.11.2017 22:28) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/d1a0ba679ef8de287c58a6b25f8ff620b67b7f7f)
+- development releases are available in releases tab
+
+> Dev Build 3 (21.11.2017 22:16) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/79e7c1a30e42ecb86265f7eaaebb4df3571ea92e)
+- refactored function 'p' to use linked list
+
+> Dev Build 2 (21.11.2017 13:44) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/b404108f7458ca850002ad61ed011e7e8f654fcf)
+- refactored function 'v' to use linked list
+- fixed storing items into linked list in function 'n'
+
+> Refactor (21.11.2017 13:19) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/a26bf0632e0003bf630950f0a7918fca0d6537ce)
+- transforming data structure into a better solution - linked list
+- function 'n' is now optimized
+- please do not use functions 'v' to 'a' right now
+
+> Update (18.11.2017 15:20) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/a29abc96ecfa2469a25c2681d98c161e69fe6a5a)
 - added links for commits to changelog
 - offical 1.0 release can be found in releases tab
 - todo: upcomming readme edits

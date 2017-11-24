@@ -10,10 +10,13 @@ typedef struct bazar { //define bazar structure
 	int cena;
 	int rok_vyroby;
 	char stav_vozidla[200];
+	struct bazar* dalsi; //linked list
 } BAZAR;
 
 //global variables for ease of use
-BAZAR* bazare;
+BAZAR* bazare = NULL;
+BAZAR* current = NULL;
+BAZAR* prev = NULL;
 int bazar_count = 0;
 
 void readUntilBreak(char **string) { //read from stdin until '\n' line break character is present
@@ -49,19 +52,27 @@ void f_n() { //function 'n'
 	rewind(f); //go back to the beginning of file
 
 	if (bazare != NULL) { free(bazare); } //if "bazare" has some data in it, clear it
-	bazare = malloc(bazar_count * sizeof(BAZAR)); //alloc enough ram for "bazare"
+	bazare = (BAZAR*)malloc(sizeof(BAZAR)); //alloc enough ram for "bazare"
 	if (bazare == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
 
-	int index = 0; //set array index to 0
+	current = bazare;
+
+	int i = 1;
 	while (fgets(line, line_size, f) != NULL) { //go through the file
 		if (strstr(line, "$") != NULL) { //store all data into the structure
-			fgets(line, line_size, f); strcpy(bazare[index].kategoria, line);
-			fgets(line, line_size, f); strcpy(bazare[index].znacka, line);
-			fgets(line, line_size, f); strcpy(bazare[index].predajca, line);
-			fgets(line, line_size, f); bazare[index].cena = atoi(line);
-			fgets(line, line_size, f); bazare[index].rok_vyroby = atoi(line);
-			fgets(line, line_size, f); strcpy(bazare[index].stav_vozidla, line);
-			index++;
+			fgets(line, line_size, f); strcpy(current->kategoria, line);
+			fgets(line, line_size, f); strcpy(current->znacka, line);
+			fgets(line, line_size, f); strcpy(current->predajca, line);
+			fgets(line, line_size, f); current->cena = atoi(line);
+			fgets(line, line_size, f); current->rok_vyroby = atoi(line);
+			fgets(line, line_size, f); strcpy(current->stav_vozidla, line);
+			if (i < bazar_count) { //only create next item if there is another one
+				current->dalsi = (BAZAR*)malloc(sizeof(BAZAR));
+				if (current == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+				current = current->dalsi;
+				current->dalsi = NULL;
+			}
+			i++;
 		}
 	}
 
@@ -72,8 +83,13 @@ void f_n() { //function 'n'
 
 void f_v() {
 	if (bazare == NULL) { return; }
-	for (int i = 0; i < bazar_count; i++) {
-		printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s",i+1,bazare[i].kategoria,bazare[i].znacka,bazare[i].predajca,bazare[i].cena,bazare[i].rok_vyroby,bazare[i].stav_vozidla);
+
+	current = bazare;
+	int i = 1;
+	while (current != NULL) {
+		printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s",i,current->kategoria,current->znacka,current->predajca,current->cena,current->rok_vyroby,current->stav_vozidla);
+		current = current->dalsi;
+		i++;
 	}
 }
 
@@ -81,52 +97,54 @@ void f_p() {
 	int cislo = 0;
 	scanf("%d\n",&cislo); //also read '\n' character to not mess up readUntilBreak() function
 	
-	//if (bazare == NULL) { return; }
-	
 	if ((cislo > bazar_count) || (cislo < 1)) { //if number is greater than the number of entries, or lower than 1, make it one more then the entry count
 		cislo = bazar_count + 1;
 	}
-
-	BAZAR* novy; //new structure
-	bazar_count++; //increment the size
-
-	novy = malloc(bazar_count * sizeof(BAZAR)); //alloc enough ram for new structure
-	if (novy == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+	bazar_count++;
 
 	char* line; //line buffer
-	
-	BAZAR tmp; //read new data and store them temporarily
-	readUntilBreak(&line); strcpy(tmp.kategoria, line);
-	readUntilBreak(&line); strcpy(tmp.znacka, line);
-	readUntilBreak(&line); strcpy(tmp.predajca, line);
-	readUntilBreak(&line); tmp.cena = atoi(line);
-	readUntilBreak(&line); tmp.rok_vyroby = atoi(line);
-	readUntilBreak(&line); strcpy(tmp.stav_vozidla, line);
+	BAZAR* tmp = (BAZAR*)malloc(sizeof(BAZAR)); //new data temporary storage
+	if (tmp == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+	readUntilBreak(&line); strcpy(tmp->kategoria, line);
+	readUntilBreak(&line); strcpy(tmp->znacka, line);
+	readUntilBreak(&line); strcpy(tmp->predajca, line);
+	readUntilBreak(&line); tmp->cena = atoi(line);
+	readUntilBreak(&line); tmp->rok_vyroby = atoi(line);
+	readUntilBreak(&line); strcpy(tmp->stav_vozidla, line);
+	tmp->dalsi = NULL;
+
+	current = bazare;
+
+	if (bazare == NULL) {
+		bazare = tmp;
+	}
+	else {
+		if (cislo > (bazar_count - 1)) { //add new data to the end of linked list
+			prev = current; //keep previous
+			while (current != NULL) {
+				prev = current;
+				current = current->dalsi; //find last item
+			}
+			prev->dalsi = tmp;
+		}
+		else {
+			prev = current; //keep previous
+			if (cislo == 1) { //shift all data to right
+				tmp->dalsi = bazare;
+				bazare = tmp;
+			}
+			else { //only shift part of data to right
+				for (int i = 1; i < cislo; i++) {
+					prev = current;
+					current = current->dalsi;
+				}
+				prev->dalsi = tmp;
+				tmp->dalsi = current;
+			}
+		}
+	}
+
 	free(line);
-
-	int index = 0; //index in the old array
-
-	if ((cislo-1) <= (bazar_count-1)) { //if the index exists
-		for (int i = 0; i < bazar_count; i++) { //go through the structure
-			if (i == (cislo-1)) {  //add the new data in place of the index
-				novy[i] = tmp;
-				index--; //if index was altered, lower it back down
-			}
-			else { //otherwise copy old data
-				novy[i] = bazare[index];
-			}
-			index++; //increment index of element in old array
-		}
-	}
-	else { //the index did not exist - add new data to the end
-		for (int i = 0; i < (bazar_count-1); i++) {
-			novy[i] = bazare[i];
-		}
-		novy[(bazar_count - 1)] = tmp;
-	}
-
-	free(bazare);
-	bazare = novy; //give back new array
 }
 
 void f_z() {
@@ -134,67 +152,66 @@ void f_z() {
 
 	char temp1[50]; //temp string 1 - from structure
 	char temp2[50]; //temp string 2 - from stdin
-	int* indexes; //array of indexes of entries being kept
-	indexes = (int*)malloc(bazar_count * sizeof(int));
-	if (indexes == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
 
-	scanf("%s",&temp2); //scan for input to compare
+	scanf("%s", &temp2); //scan for input to compare
 	temp2[strlen(temp2)] = '\0'; //properly finish string
 	for (int j = 0; j < strlen(temp2); j++) { temp2[j] = tolower(temp2[j]); } //convert to lowercase
 
-	int kept = 0; //number of kept entries
+	int removed = 0; //number of removed entries
 
-	for (int i = 0; i < bazar_count; i++) { //go throught the structure
-		strcpy(temp1,bazare[i].znacka);
+	current = bazare;
+	prev = NULL;
+	int move = 1;
+	while (current != NULL) {
+		strcpy(temp1, current->znacka);
 		for (int j = 0; j < strlen(temp1); j++) { temp1[j] = tolower(temp1[j]); } //convert string to lowercase
-		if (strstr(temp1, temp2) == NULL) { indexes[kept] = i; kept++; } //if no match is found, put index of entry to the array
+		if (strstr(temp1, temp2) != NULL) {
+			if (prev == NULL) { bazare = current->dalsi; current = bazare; prev = NULL; move = 0; }
+			else {
+				prev->dalsi = current->dalsi; move = 1;
+			}
+			removed++;
+		}
+		else {
+			move = 1;
+		}
+		if (move) { prev = current; }
+		if ((current != NULL) && move) { current = current->dalsi; }
 	}
+	bazar_count -= removed;
 
-	int removed = bazar_count - kept;
-	bazar_count = kept;
-
-	BAZAR* novy; //new structure without removed items
-	novy = malloc(bazar_count * sizeof(BAZAR)); //alloc enough ram for new structure
-	if (novy == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
-
-	for (int i = 0; i < bazar_count; i++) {
-		novy[i] = bazare[indexes[i]]; //put kept items to the new array
-	}
-
-	free(bazare);
-	bazare = novy;
-	free(indexes);
-
-	printf("Vymazalo sa %d zaznamov\n",removed);
+	printf("Vymazalo sa %d zaznamov\n", removed);
 }
 
 void f_h() {
 	if (bazare == NULL) { return; }
 
-	int* indexes; //array of indexes of entries to print
-	indexes = (int*)malloc(bazar_count * sizeof(int));
-	if (indexes == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
-
 	int cena;
 	scanf("%d", &cena); //scan for input to compare
 
 	int index = 0; //number of entries to print
-	for (int i = 0; i < bazar_count; i++) { //go throught the structure
-		if (bazare[i].cena <= cena) { indexes[index] = i; index++; } //if match is found, store the index
+	current = bazare;
+	while (current != NULL) {
+		if (current->cena <= cena) {
+			index++;
+		}
+		current = current->dalsi;
 	}
-
+	current = bazare;
 	if (index == 0) { printf("V ponuke su len auta s vyssou cenou\n"); return; } //if no match was found, print message and return;
-
-	int j = 0;
-	for (int i = 0; i < index; i++) { //print all matches
-		j = indexes[i];
-		printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s", i + 1, bazare[j].kategoria, bazare[j].znacka, bazare[j].predajca, bazare[j].cena, bazare[j].rok_vyroby, bazare[j].stav_vozidla);
+	index = 1;
+	while (current != NULL) {
+		if (current->cena <= cena) {
+			printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s", index, current->kategoria, current->znacka, current->predajca, current->cena, current->rok_vyroby, current->stav_vozidla);
+			index++;
+		}
+		current = current->dalsi;
 	}
-
-	free(indexes);
 }
 
 void f_a() {
+	if (bazare == NULL) { return; }
+
 	char* line; //line buffer
 	char* znacka;
 	int cena;
@@ -205,30 +222,33 @@ void f_a() {
 	readUntilBreak(&line); //read cena to compare
 	cena = atoi(line);
 
-	BAZAR tmp; //read new data and store them temporarily
-	readUntilBreak(&line); strcpy(tmp.kategoria, line);
-	readUntilBreak(&line); strcpy(tmp.znacka, line);
-	readUntilBreak(&line); strcpy(tmp.predajca, line);
-	readUntilBreak(&line); tmp.cena = atoi(line);
-	readUntilBreak(&line); tmp.rok_vyroby = atoi(line);
-	readUntilBreak(&line); strcpy(tmp.stav_vozidla, line);
+	BAZAR* tmp = (BAZAR*)malloc(sizeof(BAZAR)); //new data temporary storage
+	if (tmp == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+	readUntilBreak(&line); strcpy(tmp->kategoria, line);
+	readUntilBreak(&line); strcpy(tmp->znacka, line);
+	readUntilBreak(&line); strcpy(tmp->predajca, line);
+	readUntilBreak(&line); tmp->cena = atoi(line);
+	readUntilBreak(&line); tmp->rok_vyroby = atoi(line);
+	readUntilBreak(&line); strcpy(tmp->stav_vozidla, line);
 	free(line);
 
-	int* indexes; //array of indexes of entries to edit
-	indexes = (int*)malloc(bazar_count * sizeof(int));
-	if (indexes == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
-
-	int index = 0; //number of entries to edit
-	for (int i = 0; i < bazar_count; i++) { //go throught the structure
-		if ((bazare[i].cena == cena) && (strcmp(bazare[i].znacka, znacka) == 0)) { indexes[index] = i; index++; } //if match is found, store the index
+	current = bazare;
+	prev = NULL;
+	char temp[50];
+	int count = 0;
+	while (current != NULL) { //go through the structure
+		strcpy(temp,current->znacka); //get "znacka" and store it into temp
+		if ((current->cena == cena) && !strcmp(temp, znacka)) { //compare each entrie's price and sign
+			tmp->dalsi = current->dalsi; //add link to next entry to tmp
+			if (prev != NULL) { prev->dalsi = tmp; current = tmp; } //change current entry for the new one
+			else { bazare = tmp; current = tmp; }
+			count++;
+		}
+		prev = current;
+		current = current->dalsi;
 	}
 
-	for (int i = 0; i < index; i++) {
-		bazare[indexes[i]] = tmp; //replace existing data with updated data
-	}
-
-	printf("Aktualizovalo sa %d zaznamov\n",index);
-	free(indexes);
+	printf("Aktualizovalo sa %d zaznamov\n",count); //print count of edits
 }
 
 int main() {
