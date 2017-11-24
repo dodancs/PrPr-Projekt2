@@ -2,18 +2,18 @@
 
 ---------
 
-> Build 10 (24.11.2017 14:40)
+> Build 10 (24.11.2017 14:40) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/c74da7e3df8ccf0b7047996c3394c0f0f57f5633)
 - merged development branch
 - offical release 2.0 can be found in releases tab
 
-> Dev Build 10 (24.11.2017 14:30)
+> Dev Build 10 (24.11.2017 14:30) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/58822629bf86183e5bae6373c1da2d4d29ca3ef4)
 - more optimization - using global variables for common cases
 
-> Dev Build 9 (24.11.2017 13:56)
+> Dev Build 9 (24.11.2017 13:56) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/364db78f4a9b735779365362eb7aa485d76f2919)
 - fixed function 'p' to be able to add new entries when structure is not created first
 - some more optimizations
 
-> Dev Build 8 (24.11.2017 13:42)
+> Dev Build 8 (24.11.2017 13:42) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/5c6018ad42b28480d7cb5839dce8277ac661f2fd)
 - removed unused variables
 - removed useless variables
 - reused existing variables
