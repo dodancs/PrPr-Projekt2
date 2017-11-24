@@ -2,6 +2,10 @@
 
 ---------
 
+> Dev Build 9 (24.11.2017 13:56)
+- fixed function 'p' to be able to add new entries when structure is not created first
+- some more optimizations
+
 > Dev Build 8 (24.11.2017 13:42)
 - removed unused variables
 - removed useless variables

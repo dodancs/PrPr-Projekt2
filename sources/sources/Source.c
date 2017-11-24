@@ -66,10 +66,8 @@ void f_n() { //function 'n'
 			fgets(line, line_size, f); strcpy(current->stav_vozidla, line);
 			if (i < bazar_count) { //only create next item if there is another one
 				current->dalsi = (BAZAR*)malloc(sizeof(BAZAR));
-				current = current->dalsi;
 				if (current == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
-			}
-			else { //next item does not exist - set it to NULL
+				current = current->dalsi;
 				current->dalsi = NULL;
 			}
 			i++;
@@ -83,6 +81,7 @@ void f_n() { //function 'n'
 
 void f_v() {
 	if (bazare == NULL) { return; }
+
 	BAZAR* current = bazare;
 	int i = 1;
 	while (current != NULL) {
@@ -95,8 +94,6 @@ void f_v() {
 void f_p() {
 	int cislo = 0;
 	scanf("%d\n",&cislo); //also read '\n' character to not mess up readUntilBreak() function
-	
-	if (bazare == NULL) { return; }
 	
 	if ((cislo > bazar_count) || (cislo < 1)) { //if number is greater than the number of entries, or lower than 1, make it one more then the entry count
 		cislo = bazar_count + 1;
@@ -112,31 +109,36 @@ void f_p() {
 	readUntilBreak(&line); tmp->cena = atoi(line);
 	readUntilBreak(&line); tmp->rok_vyroby = atoi(line);
 	readUntilBreak(&line); strcpy(tmp->stav_vozidla, line);
+	tmp->dalsi = NULL;
 
 	BAZAR* current = bazare;
 
-	if (cislo > (bazar_count - 1)) { //add new data to the end of linked list
-		BAZAR* prev = current; //keep previous
-		while (current != NULL) {
-			prev = current;
-			current = current->dalsi; //find last item
-		}
-		prev->dalsi = tmp;
-		tmp->dalsi = NULL;
+	if (bazare == NULL) {
+		bazare = tmp;
 	}
 	else {
-		BAZAR* prev = current; //keep previous
-		if (cislo == 1) { //shift all data to right
-			tmp->dalsi = bazare;
-			bazare = tmp;
-		}
-		else { //only shift part of data to right
-			for (int i = 1; i < cislo; i++) {
+		if (cislo > (bazar_count - 1)) { //add new data to the end of linked list
+			BAZAR* prev = current; //keep previous
+			while (current != NULL) {
 				prev = current;
-				current = current->dalsi;
+				current = current->dalsi; //find last item
 			}
 			prev->dalsi = tmp;
-			tmp->dalsi = current;
+		}
+		else {
+			BAZAR* prev = current; //keep previous
+			if (cislo == 1) { //shift all data to right
+				tmp->dalsi = bazare;
+				bazare = tmp;
+			}
+			else { //only shift part of data to right
+				for (int i = 1; i < cislo; i++) {
+					prev = current;
+					current = current->dalsi;
+				}
+				prev->dalsi = tmp;
+				tmp->dalsi = current;
+			}
 		}
 	}
 
@@ -206,6 +208,8 @@ void f_h() {
 }
 
 void f_a() {
+	if (bazare == NULL) { return; }
+
 	char* line; //line buffer
 	char* znacka;
 	int cena;
