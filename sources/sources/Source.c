@@ -125,11 +125,9 @@ void f_p() {
 		tmp->dalsi = NULL;
 	}
 	else {
-		current = bazare;
 		BAZAR* prev = current; //keep previous
 		if (cislo == 1) { //shift all data to right
-			BAZAR* old = bazare;
-			tmp->dalsi = old;
+			tmp->dalsi = bazare;
 			bazare = tmp;
 		}
 		else { //only shift part of data to right
@@ -137,7 +135,6 @@ void f_p() {
 				prev = current;
 				current = current->dalsi;
 			}
-
 			prev->dalsi = tmp;
 			tmp->dalsi = current;
 		}
@@ -160,7 +157,6 @@ void f_z() {
 
 	BAZAR* current = bazare;
 	BAZAR* prev = NULL;
-	int i = 0;
 	int move = 1;
 	while (current != NULL) {
 		strcpy(temp1, current->znacka);
@@ -178,7 +174,7 @@ void f_z() {
 		if (move) { prev = current; }
 		if ((current != NULL) && move) { current = current->dalsi; }
 	}
-	bazar_count = bazar_count - removed;
+	bazar_count -= removed;
 
 	printf("Vymazalo sa %d zaznamov\n", removed);
 }
@@ -199,11 +195,11 @@ void f_h() {
 	}
 	current = bazare;
 	if (index == 0) { printf("V ponuke su len auta s vyssou cenou\n"); return; } //if no match was found, print message and return;
-	int i = 1;
+	index = 1;
 	while (current != NULL) {
 		if (current->cena <= cena) {
-			printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s", i, current->kategoria, current->znacka, current->predajca, current->cena, current->rok_vyroby, current->stav_vozidla);
-			i++;
+			printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s", index, current->kategoria, current->znacka, current->predajca, current->cena, current->rok_vyroby, current->stav_vozidla);
+			index++;
 		}
 		current = current->dalsi;
 	}
@@ -228,18 +224,15 @@ void f_a() {
 	readUntilBreak(&line); tmp->cena = atoi(line);
 	readUntilBreak(&line); tmp->rok_vyroby = atoi(line);
 	readUntilBreak(&line); strcpy(tmp->stav_vozidla, line);
-	tmp->dalsi = NULL;
 	free(line);
 
 	BAZAR* current = bazare;
 	BAZAR* prev = NULL;
 	char temp[50];
-	int a = 0;
 	int count = 0;
 	while (current != NULL) { //go through the structure
 		strcpy(temp,current->znacka); //get "znacka" and store it into temp
-		a = current->cena;
-		if ((a == cena) && !strcmp(temp, znacka)) { //compare each entrie's price and sign
+		if ((current->cena == cena) && !strcmp(temp, znacka)) { //compare each entrie's price and sign
 			tmp->dalsi = current->dalsi; //add link to next entry to tmp
 			if (prev != NULL) { prev->dalsi = tmp; current = tmp; } //change current entry for the new one
 			else { bazare = tmp; current = tmp; }

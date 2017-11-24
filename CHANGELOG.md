@@ -2,11 +2,20 @@
 
 ---------
 
-> Dev Build 7 (24.11.2017 13:28)
+> Dev Build 8 (24.11.2017 13:42)
+- removed unused variables
+- removed useless variables
+- reused existing variables
+- some memory optimization
+
+> Update (24.11.2017 13:42)
+- added new links for commits
+
+> Dev Build 7 (24.11.2017 13:28) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/71b8d29b549b16dfda369d5de183f8ef6bd4ace0)
 - removed temporary testing console outputs
 - added comments for function 'a'
 
-> Dev Build 6 (24.11.2017 13:15)
+> Dev Build 6 (24.11.2017 13:15) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/999232b56641b65dd825c0d53c9dd666d8f5b6f9)
 - refactored function 'a' to use linked lists
 - upcomming stable release
 
