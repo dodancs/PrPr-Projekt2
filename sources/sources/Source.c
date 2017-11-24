@@ -152,7 +152,7 @@ void f_z() {
 	char temp1[50]; //temp string 1 - from structure
 	char temp2[50]; //temp string 2 - from stdin
 
-	scanf("%s",&temp2); //scan for input to compare
+	scanf("%s", &temp2); //scan for input to compare
 	temp2[strlen(temp2)] = '\0'; //properly finish string
 	for (int j = 0; j < strlen(temp2); j++) { temp2[j] = tolower(temp2[j]); } //convert to lowercase
 
@@ -160,21 +160,27 @@ void f_z() {
 
 	BAZAR* current = bazare;
 	BAZAR* prev = NULL;
-	for (int i = 0; i < bazar_count; i++) { //go throught the structure
-		if (current == NULL) { break; }
-		strcpy(temp1,current->znacka);
+	int i = 0;
+	int move = 1;
+	while (current != NULL) {
+		strcpy(temp1, current->znacka);
 		for (int j = 0; j < strlen(temp1); j++) { temp1[j] = tolower(temp1[j]); } //convert string to lowercase
 		if (strstr(temp1, temp2) != NULL) {
-			if (prev == NULL) { printf("tu som\n"); bazare = current->dalsi; current = bazare; }
-			else { printf("tu nie som\n"); prev->dalsi = current->dalsi; }
+			if (prev == NULL) { bazare = current->dalsi; current = bazare; prev = NULL; move = 0; }
+			else {
+				prev->dalsi = current->dalsi; move = 1;
+			}
 			removed++;
-		} 
-		prev = current;
-		current = current->dalsi;
+		}
+		else {
+			move = 1;
+		}
+		if (move) { prev = current; }
+		if ((current != NULL) && move) { current = current->dalsi; }
 	}
 	bazar_count = bazar_count - removed;
 
-	printf("Vymazalo sa %d zaznamov\n",removed);
+	printf("Vymazalo sa %d zaznamov\n", removed);
 }
 
 void f_h() {

@@ -2,6 +2,10 @@
 
 ---------
 
+> Dev Build 5 (24.11.2017 12:42)
+- fixed function 'z', deleting entries now fully works (with linked lists)
+- new release dev-2.4 is available in releases tab
+
 > Dev Build 4 (23.11.2017 18:57)
 - refactored function 'h' to use linked lists
 - function 'z' partially works, but there are issues when deleting the whole structure
