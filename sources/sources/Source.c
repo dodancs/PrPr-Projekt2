@@ -220,30 +220,41 @@ void f_a() {
 	readUntilBreak(&line); //read cena to compare
 	cena = atoi(line);
 
-	BAZAR tmp; //read new data and store them temporarily
-	readUntilBreak(&line); strcpy(tmp.kategoria, line);
-	readUntilBreak(&line); strcpy(tmp.znacka, line);
-	readUntilBreak(&line); strcpy(tmp.predajca, line);
-	readUntilBreak(&line); tmp.cena = atoi(line);
-	readUntilBreak(&line); tmp.rok_vyroby = atoi(line);
-	readUntilBreak(&line); strcpy(tmp.stav_vozidla, line);
+	printf("kriteria: znacka: %s, cena: %d\n",znacka,cena);
+
+	BAZAR* tmp = (BAZAR*)malloc(sizeof(BAZAR)); //new data temporary storage
+	if (tmp == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
+	readUntilBreak(&line); strcpy(tmp->kategoria, line);
+	readUntilBreak(&line); strcpy(tmp->znacka, line);
+	readUntilBreak(&line); strcpy(tmp->predajca, line);
+	readUntilBreak(&line); tmp->cena = atoi(line);
+	readUntilBreak(&line); tmp->rok_vyroby = atoi(line);
+	readUntilBreak(&line); strcpy(tmp->stav_vozidla, line);
+	tmp->dalsi = NULL;
 	free(line);
 
-	int* indexes; //array of indexes of entries to edit
-	indexes = (int*)malloc(bazar_count * sizeof(int));
-	if (indexes == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
-
-	int index = 0; //number of entries to edit
-	for (int i = 0; i < bazar_count; i++) { //go throught the structure
-		if ((bazare[i].cena == cena) && (strcmp(bazare[i].znacka, znacka) == 0)) { indexes[index] = i; index++; } //if match is found, store the index
+	BAZAR* current = bazare;
+	BAZAR* prev = NULL;
+	char temp[50];
+	int a = 0;
+	int count = 0;
+	while (current != NULL) {
+		//printf("kriteria: znacka: %s, cena: %d\n", current->znacka, current->cena);
+		strcpy(temp,current->znacka);
+		a = current->cena;
+		//if (a == cena) { printf("cena sedi\n"); }
+		//if (!strcmp(temp,znacka)) { printf("znacka sedi\n"); }
+		if ((a == cena) && !strcmp(temp, znacka)) {
+			tmp->dalsi = current->dalsi;
+			if (prev != NULL) { prev->dalsi = tmp; current = tmp; }
+			else { bazare = tmp; current = tmp; }
+			count++;
+		}
+		prev = current;
+		current = current->dalsi;
 	}
 
-	for (int i = 0; i < index; i++) {
-		bazare[indexes[i]] = tmp; //replace existing data with updated data
-	}
-
-	printf("Aktualizovalo sa %d zaznamov\n",index);
-	free(indexes);
+	printf("Aktualizovalo sa %d zaznamov\n",count);
 }
 
 int main() {

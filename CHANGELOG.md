@@ -2,6 +2,10 @@
 
 ---------
 
+> Dev Build 6 (24.11.2017 13:15)
+- refactored function 'a' to use linked lists
+- upcomming stable release
+
 > Dev Build 5 (24.11.2017 12:42) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/dfd6e250b73ac4a720f045bc0f7134ee8f334cda)
 - fixed function 'z', deleting entries now fully works (with linked lists)
 - new release dev-2.4 is available in releases tab
