@@ -2,6 +2,9 @@
 
 ---------
 
+> Dev Build 10 (24.11.2017 14:30)
+- more optimization - using global variables for common cases
+
 > Dev Build 9 (24.11.2017 13:56)
 - fixed function 'p' to be able to add new entries when structure is not created first
 - some more optimizations

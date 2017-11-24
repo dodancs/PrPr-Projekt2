@@ -14,7 +14,9 @@ typedef struct bazar { //define bazar structure
 } BAZAR;
 
 //global variables for ease of use
-BAZAR* bazare;
+BAZAR* bazare = NULL;
+BAZAR* current = NULL;
+BAZAR* prev = NULL;
 int bazar_count = 0;
 
 void readUntilBreak(char **string) { //read from stdin until '\n' line break character is present
@@ -53,7 +55,7 @@ void f_n() { //function 'n'
 	bazare = (BAZAR*)malloc(sizeof(BAZAR)); //alloc enough ram for "bazare"
 	if (bazare == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
 
-	BAZAR* current = bazare;
+	current = bazare;
 
 	int i = 1;
 	while (fgets(line, line_size, f) != NULL) { //go through the file
@@ -82,7 +84,7 @@ void f_n() { //function 'n'
 void f_v() {
 	if (bazare == NULL) { return; }
 
-	BAZAR* current = bazare;
+	current = bazare;
 	int i = 1;
 	while (current != NULL) {
 		printf("%d.\nkategoria: %sznacka: %spredajca: %scena: %d\nrok_vyroby: %d\nstav_vozidla: %s",i,current->kategoria,current->znacka,current->predajca,current->cena,current->rok_vyroby,current->stav_vozidla);
@@ -111,14 +113,14 @@ void f_p() {
 	readUntilBreak(&line); strcpy(tmp->stav_vozidla, line);
 	tmp->dalsi = NULL;
 
-	BAZAR* current = bazare;
+	current = bazare;
 
 	if (bazare == NULL) {
 		bazare = tmp;
 	}
 	else {
 		if (cislo > (bazar_count - 1)) { //add new data to the end of linked list
-			BAZAR* prev = current; //keep previous
+			prev = current; //keep previous
 			while (current != NULL) {
 				prev = current;
 				current = current->dalsi; //find last item
@@ -126,7 +128,7 @@ void f_p() {
 			prev->dalsi = tmp;
 		}
 		else {
-			BAZAR* prev = current; //keep previous
+			prev = current; //keep previous
 			if (cislo == 1) { //shift all data to right
 				tmp->dalsi = bazare;
 				bazare = tmp;
@@ -157,8 +159,8 @@ void f_z() {
 
 	int removed = 0; //number of removed entries
 
-	BAZAR* current = bazare;
-	BAZAR* prev = NULL;
+	current = bazare;
+	prev = NULL;
 	int move = 1;
 	while (current != NULL) {
 		strcpy(temp1, current->znacka);
@@ -188,7 +190,7 @@ void f_h() {
 	scanf("%d", &cena); //scan for input to compare
 
 	int index = 0; //number of entries to print
-	BAZAR* current = bazare;
+	current = bazare;
 	while (current != NULL) {
 		if (current->cena <= cena) {
 			index++;
@@ -230,8 +232,8 @@ void f_a() {
 	readUntilBreak(&line); strcpy(tmp->stav_vozidla, line);
 	free(line);
 
-	BAZAR* current = bazare;
-	BAZAR* prev = NULL;
+	current = bazare;
+	prev = NULL;
 	char temp[50];
 	int count = 0;
 	while (current != NULL) { //go through the structure
