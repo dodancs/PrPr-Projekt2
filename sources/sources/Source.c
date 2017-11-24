@@ -220,8 +220,6 @@ void f_a() {
 	readUntilBreak(&line); //read cena to compare
 	cena = atoi(line);
 
-	printf("kriteria: znacka: %s, cena: %d\n",znacka,cena);
-
 	BAZAR* tmp = (BAZAR*)malloc(sizeof(BAZAR)); //new data temporary storage
 	if (tmp == NULL) { printf("Nepodarilo sa priradit pamat\n"); return; } //if ram allocation wasn't successful, print error message
 	readUntilBreak(&line); strcpy(tmp->kategoria, line);
@@ -238,15 +236,12 @@ void f_a() {
 	char temp[50];
 	int a = 0;
 	int count = 0;
-	while (current != NULL) {
-		//printf("kriteria: znacka: %s, cena: %d\n", current->znacka, current->cena);
-		strcpy(temp,current->znacka);
+	while (current != NULL) { //go through the structure
+		strcpy(temp,current->znacka); //get "znacka" and store it into temp
 		a = current->cena;
-		//if (a == cena) { printf("cena sedi\n"); }
-		//if (!strcmp(temp,znacka)) { printf("znacka sedi\n"); }
-		if ((a == cena) && !strcmp(temp, znacka)) {
-			tmp->dalsi = current->dalsi;
-			if (prev != NULL) { prev->dalsi = tmp; current = tmp; }
+		if ((a == cena) && !strcmp(temp, znacka)) { //compare each entrie's price and sign
+			tmp->dalsi = current->dalsi; //add link to next entry to tmp
+			if (prev != NULL) { prev->dalsi = tmp; current = tmp; } //change current entry for the new one
 			else { bazare = tmp; current = tmp; }
 			count++;
 		}
@@ -254,7 +249,7 @@ void f_a() {
 		current = current->dalsi;
 	}
 
-	printf("Aktualizovalo sa %d zaznamov\n",count);
+	printf("Aktualizovalo sa %d zaznamov\n",count); //print count of edits
 }
 
 int main() {

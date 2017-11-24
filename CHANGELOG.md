@@ -2,6 +2,10 @@
 
 ---------
 
+> Dev Build 7 (24.11.2017 13:28)
+- removed temporary testing console outputs
+- added comments for function 'a'
+
 > Dev Build 6 (24.11.2017 13:15)
 - refactored function 'a' to use linked lists
 - upcomming stable release
