@@ -2,30 +2,30 @@
 
 ---------
 
-> Dev Build 5 (24.11.2017 12:42)
+> Dev Build 5 (24.11.2017 12:42) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/dfd6e250b73ac4a720f045bc0f7134ee8f334cda)
 - fixed function 'z', deleting entries now fully works (with linked lists)
 - new release dev-2.4 is available in releases tab
 
-> Dev Build 4 (23.11.2017 18:57)
+> Dev Build 4 (23.11.2017 18:57) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/113ee2170c245418f0e87674b18174928f6c0e8d)
 - refactored function 'h' to use linked lists
 - function 'z' partially works, but there are issues when deleting the whole structure
 
-> Update (21.11.2017 22:28)
+> Update (21.11.2017 22:28) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/d1a0ba679ef8de287c58a6b25f8ff620b67b7f7f)
 - development releases are available in releases tab
 
-> Dev Build 3 (21.11.2017 22:16)
+> Dev Build 3 (21.11.2017 22:16) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/79e7c1a30e42ecb86265f7eaaebb4df3571ea92e)
 - refactored function 'p' to use linked list
 
-> Dev Build 2 (21.11.2017 13:44)
+> Dev Build 2 (21.11.2017 13:44) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/b404108f7458ca850002ad61ed011e7e8f654fcf)
 - refactored function 'v' to use linked list
 - fixed storing items into linked list in function 'n'
 
-> Refactor (21.11.2017 13:19)
+> Refactor (21.11.2017 13:19) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/a26bf0632e0003bf630950f0a7918fca0d6537ce)
 - transforming data structure into a better solution - linked list
 - function 'n' is now optimized
 - please do not use functions 'v' to 'a' right now
 
-> Update (18.11.2017 15:20)
+> Update (18.11.2017 15:20) [commit](https://github.com/dodancs/PrPr-Projekt2/commit/a29abc96ecfa2469a25c2681d98c161e69fe6a5a)
 - added links for commits to changelog
 - offical 1.0 release can be found in releases tab
 - todo: upcomming readme edits
